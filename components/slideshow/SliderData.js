@@ -1,0 +1,22 @@
+export const SliderData = [
+  {
+    image:
+      "https://png.pngtree.com/thumb_back/fh260/background/20190220/ourmid/pngtree-cartoon-education-training-cram-school-image_9149.jpg",
+  },
+  {
+    image:
+      "https://c8.alamy.com/comp/2BKM0TJ/online-school-e-learning-vector-banner-e-learning-online-school-text-with-laptop-computer-and-school-elements-for-global-home-education-2BKM0TJ.jpg",
+  },
+  {
+    image:
+      "https://img.freepik.com/free-vector/education-horizontal-typography-banner-set-with-learning-knowledge-symbols-flat-illustration_1284-29493.jpg?w=2000",
+  },
+  {
+    image:
+      "https://st2.depositphotos.com/2684485/6216/v/950/depositphotos_62166939-stock-illustration-vector-people-scientists-research-in.jpg",
+  },
+  {
+    image:
+      "https://st2.depositphotos.com/7341970/10354/v/950/depositphotos_103548982-stock-illustration-healthcare-and-medical-research-banner.jpg",
+  },
+];

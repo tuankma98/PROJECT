@@ -1,0 +1,40 @@
+.blog-post-content {
+  margin-top: 30px;
+}
+
+.blog-post-content > * {
+  font-size: 20px;
+}
+
+.blog-view {
+}
+.blog-view__title {
+  h1 {
+    width: 600px;
+    font-weight: bold;
+  }
+
+  p {
+    text-align: center;
+    font-size: 20px;
+    margin: 0;
+  }
+}
+
+.blog-view__author {
+  display: flex;
+  align-items: center;
+
+  .blog-view__avata {
+    margin-right: 15px;
+  }
+
+  .blog-view__name {
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
+
+.blog-wrapper {
+  justify-content: center;
+}
