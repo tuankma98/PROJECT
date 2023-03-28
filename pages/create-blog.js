@@ -1,23 +1,23 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 
-import Editor from "../components/blog/Editor";
-import Notification from "../components/notification/Notification";
-import Copyright from "../components/CopyRight";
-import RioUpload from "../components/RioUpload";
-import Error from "../components/notification/Error";
+import Editor from '../components/blog/Editor';
+import Notification from '../components/notification/Notification';
+import Copyright from '../components/CopyRight';
+import RioUpload from '../components/RioUpload';
+import Error from '../components/notification/Error';
 
-import { addBlog } from "../store";
+import { addBlog } from '../store';
 
-import { Box } from "@mui/system";
-import DefaultLayout from "../layouts/default";
-import { Button, TextField, Typography } from "@mui/material";
-import { Grid } from "@mui/material";
-import { Container } from "@mui/material";
+import { Box } from '@mui/system';
+import DefaultLayout from '../layouts/default';
+import { Button, TextField, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Container } from '@mui/material';
 
 export default function CreateBlog() {
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const [dataContent, setDataContent] = useState("");
+  const [dataContent, setDataContent] = useState('');
   const [dataBlog, setDataBlog] = useState();
   const [popup, setPopup] = useState(false);
   const [found, setFound] = useState(false);
@@ -67,12 +67,10 @@ export default function CreateBlog() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       {popup && (
@@ -92,27 +90,19 @@ export default function CreateBlog() {
         />
       )}
 
-      <Container
-        className="settings-container profile-container blog-post"
-        sx={{ mt: 15 }}
-      >
+      <Container className="settings-container profile-container blog-post" sx={{ mt: 15 }}>
         <Box className="">
           <Typography
             variant="h3"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             Thêm bài viết mới
           </Typography>
         </Box>
 
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          ref={formRef}
-          sx={{ mt: 1 }}
-        >
+        <Box component="form" onSubmit={handleSubmit} ref={formRef} sx={{ mt: 1 }}>
           <Grid container spacing={1} className="">
             <Grid item lg={6}>
               <Box className="blog-post-title">
@@ -186,5 +176,5 @@ export default function CreateBlog() {
 }
 
 CreateBlog.getLayout = function getLayout(page) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <DefaultLayout title={'Tạo một bài viết mới'}>{page}</DefaultLayout>;
 };

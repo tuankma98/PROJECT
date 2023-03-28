@@ -1,17 +1,17 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import { Grid, Typography, CardMedia } from "@mui/material";
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import { Grid, Typography, CardMedia } from '@mui/material';
 
-import { getCourseBySlug } from "../../store";
-import DefaultLayout from "../../layouts/default";
-import Copyright from "../../components/CopyRight";
-import ShowVideo from "../../components/courses/ShowVideo";
-import Description from "../../components/courses/Description";
-import TrackItem from "../../components/courses/TrackItem";
+import { getCourseBySlug } from '../../store';
+import DefaultLayout from '../../layouts/default';
+import Copyright from '../../components/CopyRight';
+import ShowVideo from '../../components/courses/ShowVideo';
+import Description from '../../components/courses/Description';
+import TrackItem from '../../components/courses/TrackItem';
 
 function CourseId() {
   const router = useRouter();
@@ -23,7 +23,7 @@ function CourseId() {
   const { getCourseBySlugAPI } = getCourseBySlug();
   const getDataCourseItem = async (slug) => {
     const data = await getCourseBySlugAPI(slug);
-    if(data) setCourseItem(data.course);
+    if (data) setCourseItem(data.course);
   };
 
   useEffect(() => {
@@ -38,12 +38,10 @@ function CourseId() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container className="settings-container admin-courses" sx={{ mt: 20 }}>
@@ -55,16 +53,15 @@ function CourseId() {
                 {/* {courseItem.description} */}
               </Typography>
             </Box>
-            
+
             {/* Description  */}
             <Description courseItem={courseItem} />
 
             {/* Track List  */}
             <TrackItem courseItem={courseItem} />
-
           </Grid>
 
-          <Grid item xs={4} sx={{ height: "100%" }}>
+          <Grid item xs={4} sx={{ height: '100%' }}>
             <Box className="course-content" onClick={handleClick}>
               <CardMedia
                 component="img"
@@ -92,9 +89,7 @@ function CourseId() {
 
             <Box className="courses__info">
               <p>Trình độ cơ bản</p>
-              {courseItem.tracks && (
-                <p>Tổng số {courseItem.tracks.length} bài học</p>
-              )}
+              {courseItem.tracks && <p>Tổng số {courseItem.tracks.length} bài học</p>}
               <p>Thời lượng 0 phút 39 giây</p>
               <p>Học mọi lúc, mọi nơi</p>
             </Box>
@@ -108,7 +103,7 @@ function CourseId() {
 }
 
 CourseId.getLayout = function getLayout(page) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <DefaultLayout title={'Chi tiết khóa học'}>{page}</DefaultLayout>;
 };
 
 export default CourseId;

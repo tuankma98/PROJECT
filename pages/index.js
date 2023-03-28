@@ -1,21 +1,21 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
-import DefaultLayout from "../layouts/default";
-import ListCard from "../components/ListCard";
-import ImageSlider from "../components/slideshow/ImageSlider";
-import { SliderData } from "../components/slideshow/SliderData";
-import UserCards from "../components/userCard/UserCard";
-import BlogList from "../components/blog/BlogList";
-import Copyright from "../components/CopyRight";
-import { Donuts } from "../components/chart/Chart";
+import DefaultLayout from '../layouts/default';
+import ListCard from '../components/ListCard';
+import ImageSlider from '../components/slideshow/ImageSlider';
+import { SliderData } from '../components/slideshow/SliderData';
+import UserCards from '../components/userCard/UserCard';
+import BlogList from '../components/blog/BlogList';
+import Copyright from '../components/CopyRight';
+import { Donuts } from '../components/chart/Chart';
 
-import { getTeacher, getCourses, getAllUser, getAllBlog } from "../store";
+import { getTeacher, getCourses, getAllUser, getAllBlog } from '../store';
 function Home() {
   const [numberTeachers, setNumberTeachers] = useState(0);
   const [numberStudents, setNumberStudents] = useState(0);
@@ -47,7 +47,7 @@ function Home() {
   const { getAllBlogAPI } = getAllBlog();
   const getAllBlogByAll = async () => {
     const data = await getAllBlogAPI();
-    if(data) setNumberBlog(data.blog.length);
+    if (data) setNumberBlog(data.blog.length);
   };
 
   useEffect(() => {
@@ -62,12 +62,10 @@ function Home() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Toolbar />
@@ -108,7 +106,7 @@ function Home() {
 }
 
 Home.getLayout = function getLayout(page) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <DefaultLayout title={'F8 - học lập trình để đi làm!'}>{page}</DefaultLayout>;
 };
 
 export default Home;

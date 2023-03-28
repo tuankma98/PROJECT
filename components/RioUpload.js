@@ -1,9 +1,9 @@
-import { Box, CardMedia, CircularProgress, LinearProgress } from "@mui/material";
-import ReactPlayer from 'react-player'
-import React, { Component, useState } from "react";
+import { Box, CardMedia, CircularProgress, LinearProgress } from '@mui/material';
+import ReactPlayer from 'react-player';
+import React, { Component, useState } from 'react';
 import LinearWithValueLabel from '../components/RioLoading';
 
-import CircularStatic from "./general/CircularProgress";
+import CircularStatic from './general/CircularProgress';
 
 const RioUpload = ({ title, isVideo = false, setValue, data }) => {
   const [returnUrl, setReturnUrl] = useState('');
@@ -11,18 +11,16 @@ const RioUpload = ({ title, isVideo = false, setValue, data }) => {
   const [fileTitle, setFileTitle] = useState((Math.random() + 1).toString(36).substring(7));
   const [isLoading, setIsLoading] = useState(false);
 
-
   const processFile = async (e) => {
     var file = e.target.files[0];
 
-    console.log(file.duration)
+    // console.log(file.duration)
 
     // Set your cloud name and unsigned upload preset here:
-    var YOUR_CLOUD_NAME = "beau-agency";
-    var YOUR_UNSIGNED_UPLOAD_PRESET = "dwz3uw8u";
+    var YOUR_CLOUD_NAME = 'beau-agency';
+    var YOUR_UNSIGNED_UPLOAD_PRESET = 'dwz3uw8u';
 
-    var POST_URL =
-      "https://api.cloudinary.com/v1_1/" + YOUR_CLOUD_NAME + "/auto/upload";
+    var POST_URL = 'https://api.cloudinary.com/v1_1/' + YOUR_CLOUD_NAME + '/auto/upload';
 
     var XUniqueUploadId = +new Date();
 
@@ -53,27 +51,24 @@ const RioUpload = ({ title, isVideo = false, setValue, data }) => {
     }
 
     // Set file title de upload
-    setFileTitle(event.target.files[0].name)
+    setFileTitle(event.target.files[0].name);
 
     function send(piece, start, end, size) {
-      console.log("start ", start);
-      console.log("end", end);
+      console.log('start ', start);
+      console.log('end', end);
 
       var formdata = new FormData();
       console.log(XUniqueUploadId);
 
-      formdata.append("file", piece);
-      formdata.append("cloud_name", YOUR_CLOUD_NAME);
-      formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-      formdata.append("public_id", fileTitle);
+      formdata.append('file', piece);
+      formdata.append('cloud_name', YOUR_CLOUD_NAME);
+      formdata.append('upload_preset', YOUR_UNSIGNED_UPLOAD_PRESET);
+      formdata.append('public_id', fileTitle);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", POST_URL, false);
-      xhr.setRequestHeader("X-Unique-Upload-Id", XUniqueUploadId);
-      xhr.setRequestHeader(
-        "Content-Range",
-        "bytes " + start + "-" + end + "/" + size
-      );
+      xhr.open('POST', POST_URL, false);
+      xhr.setRequestHeader('X-Unique-Upload-Id', XUniqueUploadId);
+      xhr.setRequestHeader('Content-Range', 'bytes ' + start + '-' + end + '/' + size);
 
       xhr.onload = function () {
         // do something to response
@@ -98,33 +93,30 @@ const RioUpload = ({ title, isVideo = false, setValue, data }) => {
       var slice = file.mozSlice
         ? file.mozSlice
         : file.webkitSlice
-          ? file.webkitSlice
-          : file.slice
-            ? file.slice
-            : noop;
+        ? file.webkitSlice
+        : file.slice
+        ? file.slice
+        : noop;
 
       return slice.bind(file)(start, end);
     }
 
-    function noop() { }
+    function noop() {}
   };
 
   return (
     <div>
-
       {title && <h3>{title}</h3>}
-      
 
-      { isVideo
-        ? (
+      {
+        isVideo ? (
           <div className="fileUpload">
-            <input className="upload" type="file" onChange={processFile} accept="video/*"/>
+            <input className="upload" type="file" onChange={processFile} accept="video/*" />
             <span>Upload</span>
           </div>
-        )
-        : (
+        ) : (
           <div className="fileUpload">
-            <input className="upload" type="file" onChange={processFile} accept="image/*"/>
+            <input className="upload" type="file" onChange={processFile} accept="image/*" />
             <span>Upload</span>
           </div>
         )
@@ -138,21 +130,23 @@ const RioUpload = ({ title, isVideo = false, setValue, data }) => {
         isLoading && <CircularStatic />
       }
 
-      {
-        isVideo
-          ? (returnUrl ? <ReactPlayer url={returnUrl} controls /> : '')
-          : (
-            <Box
-              component="img"
-              sx={{
-                maxWidth: { xs: 350, md: 250 },
-              }}
-              src={returnUrl}
-            />
-          )
-      }
+      {isVideo ? (
+        returnUrl ? (
+          <ReactPlayer url={returnUrl} controls />
+        ) : (
+          ''
+        )
+      ) : (
+        <Box
+          component="img"
+          sx={{
+            maxWidth: { xs: 350, md: 250 },
+          }}
+          src={returnUrl}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default RioUpload;

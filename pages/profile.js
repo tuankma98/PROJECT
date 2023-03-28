@@ -1,12 +1,12 @@
-import React from "react";
-import DefaultLayout from "../layouts/default";
-import Box from "@mui/material/Box";
-import { Avatar } from "@mui/material";
-import { Grid } from "@mui/material";
-import { useState, useEffect } from "react";
-import { Container } from "@mui/material";
-import Copyright from "../components/CopyRight";
-import { getUser } from "../store";
+import React from 'react';
+import DefaultLayout from '../layouts/default';
+import Box from '@mui/material/Box';
+import { Avatar } from '@mui/material';
+import { Grid } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Container } from '@mui/material';
+import Copyright from '../components/CopyRight';
+import { getUser } from '../store';
 
 function Profile() {
   const [dataUser, setDataUser] = useState({});
@@ -26,18 +26,13 @@ function Profile() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
-      <Container
-        className="settings-container profile-container"
-        sx={{ mt: 9 }}
-      >
+      <Container className="settings-container profile-container" sx={{ mt: 9 }}>
         {/* <!-- Top settings --> */}
         <Box className="settings-top" id="settings-main">
           <Grid container className="settings-padding">
@@ -59,35 +54,23 @@ function Profile() {
           {/* <!-- Image --> */}
           <span className="settings-banner__img"></span>
           {/* <!-- Header container --> */}
-          <Grid
-            container
-            className="settings-banner-container settings-padding"
-          >
+          <Grid container className="settings-banner-container settings-padding">
             <Grid lg={7} md={10}>
               <h1>Xin chào {dataUser && dataUser.username}</h1>
               <p>
-                Đây là trang hồ sơ của bạn. Bạn có thể xem tiến độ bạn đã đạt
-                được với công việc và quản lý các dự án hoặc nhiệm vụ được giao
+                Đây là trang hồ sơ của bạn. Bạn có thể xem tiến độ bạn đã đạt được với công việc và
+                quản lý các dự án hoặc nhiệm vụ được giao
               </p>
             </Grid>
           </Grid>
         </Box>
 
         {/* <!-- Page content --> */}
-        <Grid
-          container
-          spacing={1}
-          className="settings-padding settings-content"
-        >
+        <Grid container spacing={1} className="settings-padding settings-content">
           <Grid item lg={12}>
             <Box className="settings-card settings-card-profile settings-shadow">
               <Box className="settings-card-profile__img">
-                {dataUser && (
-                  <Avatar
-                    className="rounded-circle"
-                    src={dataUser.avatar}
-                  ></Avatar>
-                )}
+                {dataUser && <Avatar className="rounded-circle" src={dataUser.avatar}></Avatar>}
               </Box>
               <Box className="settings-card-profile-body">
                 <Grid className="">
@@ -115,8 +98,7 @@ function Profile() {
                       <h3>Username</h3>
                       <p>{dataUser.username}</p>
                       <span>
-                        Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các
-                        bình luận của bạn.
+                        Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của bạn.
                       </span>
                     </li>
                     {dataUser.bio && (
@@ -124,8 +106,7 @@ function Profile() {
                         <h3>Bio</h3>
                         <p>{dataUser.bio}</p>
                         <span>
-                          Bio hiển thị trên trang cá nhân và trong các bài viết
-                          (blog) của bạn.
+                          Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của bạn.
                         </span>
                       </li>
                     )}
@@ -149,9 +130,7 @@ function Profile() {
                     <li>
                       <h3>Facebook: </h3>
                       {dataUser.facebook_Url ? (
-                        <a href={dataUser.facebook_Url}>
-                          {dataUser.facebook_Url}
-                        </a>
+                        <a href={dataUser.facebook_Url}>{dataUser.facebook_Url}</a>
                       ) : (
                         <span>Bạn chưa thêm</span>
                       )}
@@ -159,9 +138,7 @@ function Profile() {
                     <li>
                       <h3>Instagram: </h3>
                       {dataUser.instagram_Url ? (
-                        <a href={dataUser.instagram_Url}>
-                          {dataUser.instagram_Url}
-                        </a>
+                        <a href={dataUser.instagram_Url}>{dataUser.instagram_Url}</a>
                       ) : (
                         <span>Bạn chưa thêm</span>
                       )}
@@ -177,9 +154,7 @@ function Profile() {
                     <li>
                       <h3>Twitter: </h3>
                       {dataUser.twitter_Url ? (
-                        <a href={dataUser.twitter_Url}>
-                          {dataUser.twitter_Url}
-                        </a>
+                        <a href={dataUser.twitter_Url}>{dataUser.twitter_Url}</a>
                       ) : (
                         <span>Bạn chưa thêm</span>
                       )}
@@ -187,9 +162,7 @@ function Profile() {
                     <li>
                       <h3>Youtube:</h3>
                       {dataUser.youtube_Url ? (
-                        <a href={dataUser.youtube_Url}>
-                          {dataUser.youtube_Url}
-                        </a>
+                        <a href={dataUser.youtube_Url}>{dataUser.youtube_Url}</a>
                       ) : (
                         <span>Bạn chưa thêm</span>
                       )}
@@ -208,7 +181,7 @@ function Profile() {
 }
 
 Profile.getLayout = function getLayout(page) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <DefaultLayout title={'Thông tin cá nhân!'}>{page}</DefaultLayout>;
 };
 
 export default Profile;

@@ -12,7 +12,7 @@ import {
   API_TEACHERS,
   API_COMMENT,
   API_SEARCH,
-} from "../constants";
+} from '../constants';
 
 /**
  *
@@ -24,18 +24,18 @@ import {
 const fetchDataUser = async (raw, api) => {
   try {
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: raw,
-      redirect: "follow",
+      redirect: 'follow',
     });
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
@@ -58,30 +58,30 @@ export const loginAdmin = () => {
   const checkRole = async (token) => {
     try {
       const myHeaders = new Headers();
-      myHeaders.append("token", token);
+      myHeaders.append('Authorization', token);
 
       const response = await fetch(API_ME, {
-        method: "GET",
+        method: 'GET',
         headers: myHeaders,
-        redirect: "follow",
+        redirect: 'follow',
       });
       const json = await response.json();
-      return json.role === "admin" || "teacher" ? true : false;
+      return json.role === 'admin' || 'teacher' ? true : false;
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
   const fetchDataLoginAdmin = async (raw) => {
     try {
       const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append('Content-Type', 'application/json');
 
       const response = await fetch(API_ADMIN_LOGIN, {
-        method: "POST",
+        method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(raw),
-        redirect: "follow",
+        redirect: 'follow',
       });
 
       const json = await response.json();
@@ -97,8 +97,8 @@ export const loginAdmin = () => {
 /**
  * GET DATA USER
  */
-import getTokenUser from "../api/getTokenUser";
-import getTokenAdmin from "../api/getTokenAdmin";
+import getTokenUser from '../api/getTokenUser';
+import getTokenAdmin from '../api/getTokenAdmin';
 
 const getDataRole = async (func, api) => {
   try {
@@ -106,14 +106,14 @@ const getDataRole = async (func, api) => {
     func(myHeaders);
 
     const response = await fetch(api, {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     });
     const json = await response.json();
     if (response.status === 200) return json;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
@@ -121,25 +121,25 @@ const getDataRole = async (func, api) => {
 const getDataOfUser = async (func, api) => {
   try {
     const myHeaders = new Headers();
-    if (func !== "") func(myHeaders);
+    if (func !== '') func(myHeaders);
 
     const response = await fetch(api, {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     });
     const json = await response.json();
 
     if (response.status === 200) return json;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
 // GET ALL USER
 export const getAllUser = () => {
   const getAllUserAPI = async () => {
-    return getDataOfUser("", API_ALL_USER);
+    return getDataOfUser('', API_ALL_USER);
   };
 
   return { getAllUserAPI };
@@ -179,13 +179,13 @@ const patchData = async (data, api) => {
   try {
     const myHeaders = new Headers();
     getTokenUser(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: myHeaders,
       body: JSON.stringify(data),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
@@ -234,8 +234,8 @@ export const getCourses = () => {
   const fetchDataCoursesAPI = async () => {
     try {
       const response = await fetch(API_COURSES, {
-        method: "GET",
-        redirect: "follow",
+        method: 'GET',
+        redirect: 'follow',
       });
 
       const json = await response.json();
@@ -258,9 +258,9 @@ const getDataCourse = async (api) => {
     getTokenUser(myHeaders);
 
     const response = await fetch(api, {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
@@ -306,9 +306,9 @@ const getDataTeacher = async (api) => {
     getTokenAdmin(myHeaders);
 
     const response = await fetch(api, {
-      method: "GET",
+      method: 'GET',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
@@ -333,26 +333,26 @@ const addData = async (dataCourse, courseId, api) => {
   try {
     const myHeaders = new Headers();
     getTokenAdmin(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: JSON.stringify(dataCourse),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
     return response.status;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
 // ADD COURSE
 export const addCourse = () => {
   const addCourseAPI = (dataCourse) => {
-    return addData(dataCourse, "", API_COURSES);
+    return addData(dataCourse, '', API_COURSES);
   };
   return { addCourseAPI };
 };
@@ -369,7 +369,7 @@ export const addTrack = () => {
 // FORGOT PASSWORD
 export const forgotPassword = () => {
   const forgotPasswordAPI = async (email) => {
-    return addData(email, "", API_FOTGOT_PASSWORD);
+    return addData(email, '', API_FOTGOT_PASSWORD);
   };
 
   return { forgotPasswordAPI };
@@ -385,30 +385,27 @@ const addDataComment = async (data, api) => {
   try {
     const myHeaders = new Headers();
     getTokenUser(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: JSON.stringify(data),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
     // console.log(json);
     return response.status;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
 // ADD COMMENT
 export const addComment = () => {
   const addCommentAPI = async (dataComment, slugComment) => {
-    return addDataComment(
-      dataComment,
-      `${API_COMMENT}/${slugComment}?scope=blog`
-    );
+    return addDataComment(dataComment, `${API_COMMENT}/${slugComment}?scope=blog`);
   };
 
   return { addCommentAPI };
@@ -419,7 +416,7 @@ export const addCommentInTrack = () => {
   const addCommentAPI = async (dataComment, slugCourse, idTrack) => {
     return addDataComment(
       dataComment,
-      `${API_COMMENT}/${slugCourse}?scope=track&trackId=${idTrack}`
+      `${API_COMMENT}/${slugCourse}?scope=track&trackId=${idTrack}`,
     );
   };
 
@@ -432,30 +429,27 @@ const addDataCommentAdmin = async (data, api) => {
   try {
     const myHeaders = new Headers();
     getTokenAdmin(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: JSON.stringify(data),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
     // console.log(json);
     return response.status;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
 // ADD COMMENT
 export const addCommentAdmin = () => {
   const addCommentAPI = async (dataComment, slugComment) => {
-    return addDataCommentAdmin(
-      dataComment,
-      `${API_COMMENT}/${slugComment}?scope=blog`
-    );
+    return addDataCommentAdmin(dataComment, `${API_COMMENT}/${slugComment}?scope=blog`);
   };
 
   return { addCommentAPI };
@@ -466,7 +460,7 @@ export const addCommentAdminInTrack = () => {
   const addCommentAPI = async (dataComment, slugCourse, idTrack) => {
     return addDataCommentAdmin(
       dataComment,
-      `${API_COMMENT}/${slugCourse}?scope=track&trackId=${idTrack}`
+      `${API_COMMENT}/${slugCourse}?scope=track&trackId=${idTrack}`,
     );
   };
 
@@ -478,14 +472,14 @@ export const resetPassword = () => {
   const resetPasswordAPI = async (token, raw) => {
     try {
       const myHeaders = new Headers();
-      myHeaders.append("token", token);
-      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append('Authorization', token);
+      myHeaders.append('Content-Type', 'application/json');
 
       const response = await fetch(API_RESET_PASSWORD, {
-        method: "POST",
+        method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(raw),
-        redirect: "follow",
+        redirect: 'follow',
       });
 
       const json = await response.json();
@@ -493,7 +487,7 @@ export const resetPassword = () => {
       if (response.status === 200) return json;
       if (response.status === 400) return false;
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -503,7 +497,7 @@ export const resetPassword = () => {
 // CREATE TEACHER
 export const createTeacher = () => {
   const createTeacherAPI = (dataTeacher) => {
-    return addData(dataTeacher, "", API_TEACHERS);
+    return addData(dataTeacher, '', API_TEACHERS);
   };
 
   return { createTeacherAPI };
@@ -514,19 +508,19 @@ const addData2 = async (dataCourse, api) => {
   try {
     const myHeaders = new Headers();
     getTokenUser(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "POST",
+      method: 'POST',
       headers: myHeaders,
       body: JSON.stringify(dataCourse),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
     return response.status;
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 // ADD BLOG
@@ -546,13 +540,13 @@ const editData = async (data, slug, trackId, api) => {
   try {
     const myHeaders = new Headers();
     getTokenAdmin(myHeaders);
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Content-Type', 'application/json');
 
     const response = await fetch(api, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: myHeaders,
       body: JSON.stringify(data),
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
@@ -567,7 +561,7 @@ const editData = async (data, slug, trackId, api) => {
 // EDIT COURSE
 export const editCourse = () => {
   const editCourseAPI = async (dataCourse, slug) => {
-    return editData(dataCourse, "", "", `${API_COURSES}/${slug}`);
+    return editData(dataCourse, '', '', `${API_COURSES}/${slug}`);
   };
 
   return { editCourseAPI };
@@ -576,12 +570,7 @@ export const editCourse = () => {
 // EDIT TRACK
 export const editTrack = () => {
   const editTrackAPI = async (dataTrack, slug, trackId) => {
-    return editData(
-      dataTrack,
-      slug,
-      "",
-      `${API_COURSES}/${slug}/track/${trackId}`
-    );
+    return editData(dataTrack, slug, '', `${API_COURSES}/${slug}/track/${trackId}`);
   };
 
   return { editTrackAPI };
@@ -590,7 +579,7 @@ export const editTrack = () => {
 // EDIT TEACHER
 export const editTeacher = () => {
   const editTeacherAPI = async (dataTeacher, username) => {
-    return editData(dataTeacher, "", "", `${API_TEACHERS}/${username}`);
+    return editData(dataTeacher, '', '', `${API_TEACHERS}/${username}`);
   };
 
   return { editTeacherAPI };
@@ -602,13 +591,13 @@ export const editTeacher = () => {
 const deleteData = async (api, text) => {
   try {
     const myHeaders = new Headers();
-    if (text === "user") getTokenUser(myHeaders);
+    if (text === 'user') getTokenUser(myHeaders);
     else getTokenAdmin(myHeaders);
 
     const response = await fetch(api, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: myHeaders,
-      redirect: "follow",
+      redirect: 'follow',
     });
 
     const json = await response.json();
@@ -651,7 +640,7 @@ export const deleteTeacher = () => {
 // DELETE COMMENT
 export const deleteComment = () => {
   const deleteCommentAPI = async (slug, idComment) => {
-    return deleteData(`${API_COMMENT}/${slug}/${idComment}?scope=blog`, "user");
+    return deleteData(`${API_COMMENT}/${slug}/${idComment}?scope=blog`, 'user');
   };
 
   return { deleteCommentAPI };
@@ -660,10 +649,7 @@ export const deleteComment = () => {
 // DELETE COMMENT TRACK
 export const deleteCommentInTrack = () => {
   const deleteCommentAPI = async (slug, idComment, idTrack) => {
-    return deleteData(
-      `${API_COMMENT}/${slug}/${idComment}?scope=track&trackId=${idTrack}`,
-      "user"
-    );
+    return deleteData(`${API_COMMENT}/${slug}/${idComment}?scope=track&trackId=${idTrack}`, 'user');
   };
 
   return { deleteCommentAPI };
@@ -678,15 +664,15 @@ export const searchKey = () => {
       const myHeaders = new Headers();
 
       const response = await fetch(`${API_SEARCH}/?q=${key}`, {
-        method: "GET",
+        method: 'GET',
         headers: myHeaders,
-        redirect: "follow",
+        redirect: 'follow',
       });
 
       const json = await response.json();
       // console.log(json)
       if (response.status === 200) {
-        if (key === "") return false;
+        if (key === '') return false;
         else return json;
       }
       if (response.status === 400) return false;
