@@ -12,6 +12,7 @@ import {
   API_TEACHERS,
   API_COMMENT,
   API_SEARCH,
+  API_SESSION_USER,
 } from '../constants';
 
 /**
@@ -21,7 +22,7 @@ import {
  * @returns
  * LOGIN - REGISTER USER
  */
-const fetchDataUser = async (raw, api) => {
+export const fetchDataUser = async (raw, api) => {
   try {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -148,6 +149,7 @@ export const getAllUser = () => {
 // GET DATA USER
 export const getUser = () => {
   const fetchDataUser = async () => {
+    if (!getTokenUser) return;
     return getDataOfUser(getTokenUser, API_ME);
   };
 
@@ -157,6 +159,8 @@ export const getUser = () => {
 // GET DATA USER
 export const getAllBlog = () => {
   const getAllBlogAPI = async () => {
+    if (!getTokenUser) return;
+
     return getDataOfUser(getTokenUser, API_BLOG);
   };
 
@@ -373,6 +377,15 @@ export const forgotPassword = () => {
   };
 
   return { forgotPasswordAPI };
+};
+
+// POST SESSION USER
+export const sessionUser = () => {
+  const sessionUserAPI = async (user) => {
+    return patchData(user, API_SESSION_USER);
+  };
+
+  return { sessionUserAPI };
 };
 
 /**

@@ -90,7 +90,7 @@ function CourseId() {
             <Box className="courses__info">
               <p>Trình độ cơ bản</p>
               {courseItem.tracks && <p>Tổng số {courseItem.tracks.length} bài học</p>}
-              <p>Thời lượng 0 phút 39 giây</p>
+              <p>Thời lượng 4 phút 45 giây</p>
               <p>Học mọi lúc, mọi nơi</p>
             </Box>
           </Grid>

@@ -1,7 +1,7 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import ReactPlayer from "react-player";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import ReactPlayer from 'react-player';
 
 import {
   addCommentInTrack,
@@ -10,25 +10,25 @@ import {
   getAllUser,
   getUser,
   getTrackById,
-} from "../../../store";
+} from '../../../store';
 
-import DefaultLayout from "../../../layouts/default";
-import Copyright from "../../../components/CopyRight";
-import Notification from "../../../components/notification/Notification";
-import Comment1 from "../../../components/track/trackComment/Comment1";
+import DefaultLayout from '../../../layouts/default';
+import Copyright from '../../../components/CopyRight';
+import Notification from '../../../components/notification/Notification';
+import Comment1 from '../../../components/track/trackComment/Comment1';
 
-import Toolbar from "@mui/material/Toolbar";
-import { Box, Button, Container, FormLabel, Grid, TextField } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
-import TrackPost from "../../../components/track/trackComment/TrackPost";
+import Toolbar from '@mui/material/Toolbar';
+import { Box, Button, Container, FormLabel, Grid, TextField } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import TrackPost from '../../../components/track/trackComment/TrackPost';
 
 function Track() {
   const router = useRouter();
 
   const [dataTrackById, setDataTrackById] = useState([]);
 
-  const [allUser, setAllUser] = useState({});
-  const [nameUserLogin, setNameUserLogin] = useState("");
+  const [allUser, setAllUser] = useState([]);
+  const [nameUserLogin, setNameUserLogin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [popup, setPopup] = useState(false);
 
@@ -50,6 +50,7 @@ function Track() {
   const { getAllUserAPI } = getAllUser();
   const getAllUserByUser = async () => {
     const data = await getAllUserAPI();
+    console.log(data);
     if (data) setAllUser(data);
   };
 
@@ -61,12 +62,13 @@ function Track() {
   };
 
   const getAuthor = (id) => {
-    return allUser.filter((user) => user._id === id);
+    return allUser?.filter((user) => user._id === id);
   };
 
   useEffect(() => {
     getAllUserByUser();
-    getNameUser();
+    const tokens = localStorage.getItem('tokens');
+    if (tokens) getNameUser();
   }, []);
 
   /**
@@ -85,14 +87,10 @@ function Track() {
   const addNewComment = (e) => {
     e.preventDefault();
 
-    const newText = document.querySelector("#shareCommentText2").value;
-    if (newText !== "") {
-      addCommentByUser(
-        { content: newText },
-        router.query.courseId,
-        router.query.trackId
-      );
-    } else alert("Please write a comment to share!");
+    const newText = document.querySelector('#shareCommentText2').value;
+    if (newText !== '') {
+      addCommentByUser({ content: newText }, router.query.courseId, router.query.trackId);
+    } else alert('Please write a comment to share!');
   };
 
   /**
@@ -115,6 +113,7 @@ function Track() {
    * DELETE COMMENT
    */
   const { deleteCommentAPI } = deleteCommentInTrack();
+
   const deleteCommentByUser = async (value, idComment) => {
     const data = await deleteCommentAPI(value, idComment, router.query.trackId);
     if (data) getDataTrackById(router.query.courseId, router.query.trackId);
@@ -129,9 +128,7 @@ function Track() {
       <Comment1
         key={i}
         index={i}
-        removeCommentFromBoard={() =>
-          removeComment(router.query.courseId, comment._id)
-        }
+        removeCommentFromBoard={() => removeComment(router.query.courseId, comment._id)}
         updateCommentFromBoard={(value) => updateComment(value, comment._id)}
         author={() => getAuthor(comment.created_by)}
         dataAuthor={getAuthor(comment.created_by)}
@@ -147,12 +144,10 @@ function Track() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container sx={{ mt: 12 }}>
@@ -182,15 +177,8 @@ function Track() {
                       )}
 
                       <Box className="commentBox">
-                        <Box
-                          component="form"
-                          className="commentForm"
-                          noValidate
-                          sx={{ mt: 1 }}
-                        >
-                          <FormLabel className="form-control-label">
-                            Bình luận của bạn
-                          </FormLabel>
+                        <Box component="form" className="commentForm" noValidate sx={{ mt: 1 }}>
+                          <FormLabel className="form-control-label">Bình luận của bạn</FormLabel>
                           <TextField
                             fullWidth
                             required
@@ -213,10 +201,8 @@ function Track() {
 
                         {isLoading && <CircularProgress />}
 
-                        {dataTrackById.comments &&
-                          [...dataTrackById.comments]
-                            .reverse()
-                            .map(displayComments)}
+                        {dataTrackById?.comments &&
+                          [...dataTrackById.comments].reverse().map(displayComments)}
                       </Box>
                     </div>
                   </TrackPost>

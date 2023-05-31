@@ -1,14 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import { getTeacher } from "../../store";
+import { getTeacher } from '../../store';
 
-import { Box, Button, Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid } from '@mui/material';
 
-import AdminLayout from "../../layouts/admin";
-import ListTeacher from "../../components/admin/teacher/ListTeacher";
-import FormAddTeacher from "../../components/admin/teacher/FormAddTeacher";
+import AdminLayout from '../../layouts/admin';
+import ListTeacher from '../../components/admin/teacher/ListTeacher';
+import FormAddTeacher from '../../components/admin/teacher/FormAddTeacher';
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
@@ -27,7 +27,11 @@ export default function Teachers() {
   };
 
   useEffect(() => {
-    getTeachersByAdmin();
+    const tokensAdmin = localStorage.getItem('tokensAdmin');
+    if (tokensAdmin) {
+      console.log('1');
+      getTeachersByAdmin();
+    }
   }, [updateTeachers]);
 
   return (
@@ -35,21 +39,15 @@ export default function Teachers() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container className="settings-container admin-courses" sx={{ mt: 20 }}>
         {/* <!-- Page content --> */}
-        <Grid
-          container
-          spacing={1}
-          className="settings-padding settings-content"
-        >
+        <Grid container spacing={1} className="settings-padding settings-content">
           <Grid item lg={12}>
             <div className="settings-form settings-card settings-shadow">
               <div className="settings-card-header">

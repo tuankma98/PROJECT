@@ -51,7 +51,13 @@ function Home() {
   };
 
   useEffect(() => {
-    getTeachersByAdmin();
+    const tokens = localStorage.getItem('tokensAdmin');
+    console.log('tokensAdmin', tokens);
+    if (tokens) {
+      console.log('2');
+      getTeachersByAdmin();
+    }
+
     getAllUserByUser();
     getDataCourse();
     getAllBlogByAll();

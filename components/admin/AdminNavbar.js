@@ -1,19 +1,15 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-import { List } from "@mui/material";
-import { Divider } from "@mui/material";
+import { List } from '@mui/material';
+import { Divider } from '@mui/material';
 
-import {
-  mainListItems,
-  secondaryListItems,
-  thirdListItems,
-} from "./AdminListMenu";
+import { mainListItems, secondaryListItems, thirdListItems } from './AdminListMenu';
 
-import { getAdmin } from "../../store";
+import { getAdmin } from '../../store';
 
 function AdminNavBar() {
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState('');
 
   const { getAdminAPI } = getAdmin();
 
@@ -23,15 +19,16 @@ function AdminNavBar() {
   };
 
   useEffect(() => {
-    getDataAdmin();
+    const tokensAdmin = localStorage.getItem('tokensAdmin');
+    if (tokensAdmin) getDataAdmin();
   }, []);
 
   return (
     <List component="nav">
       {mainListItems}
       <Divider sx={{ my: 1 }} />
-      {role === "admin" && secondaryListItems}
-      {role === "teacher" && thirdListItems}
+      {role === 'admin' && secondaryListItems}
+      {role === 'teacher' && thirdListItems}
     </List>
   );
 }

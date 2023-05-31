@@ -30,7 +30,10 @@ export default function CourseCardUser(props) {
   // GET DATA COURSE
   const { fetchDataCoursesAPI } = getCourses();
   const getData = async () => {
-    getDataUser();
+    const tokens = localStorage.getItem('tokens');
+    if (tokens) {
+      getDataUser();
+    }
     const data = await fetchDataCoursesAPI();
     setCourses(data.course);
     console.log(data.course);

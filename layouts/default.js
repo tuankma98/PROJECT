@@ -28,7 +28,9 @@ export default function DefaultLayout({ children, title = 'Pusher Edu' }) {
   };
 
   useEffect(() => {
-    getDataUser();
+    const tokens = localStorage.getItem('tokens');
+    console.log('tokens', tokens);
+    if (tokens) getDataUser();
   }, []);
 
   return (

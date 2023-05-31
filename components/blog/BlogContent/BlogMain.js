@@ -1,11 +1,11 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import Comment1 from "./Comment1";
-import BlogPost from "./BlogPost";
-import BlogContent from "./BlogContent";
-import Notification from "../../notification/Notification";
+import Comment1 from './Comment1';
+import BlogPost from './BlogPost';
+import BlogContent from './BlogContent';
+import Notification from '../../notification/Notification';
 
 import {
   getBlogBySlug,
@@ -14,17 +14,17 @@ import {
   deleteComment,
   getAllUser,
   getUser,
-} from "../../../store";
+} from '../../../store';
 
-import { Box, Button, FormLabel, Grid, TextField } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Box, Button, FormLabel, Grid, TextField } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function BlogMain() {
   const router = useRouter();
 
   const [dataBlog, setDataBlog] = useState({});
   const [allUser, setAllUser] = useState({});
-  const [nameUserLogin, setNameUserLogin] = useState("");
+  const [nameUserLogin, setNameUserLogin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [popup, setPopup] = useState(false);
 
@@ -56,10 +56,10 @@ function BlogMain() {
   const addNewComment = (e) => {
     e.preventDefault();
 
-    const newText = document.querySelector("#shareCommentText").value;
-    if (newText !== "") {
+    const newText = document.querySelector('#shareCommentText').value;
+    if (newText !== '') {
       addCommentByUser({ content: newText }, router.query.blogId);
-    } else alert("Please write a comment to share!");
+    } else alert('Please write a comment to share!');
   };
 
   /**
@@ -107,14 +107,16 @@ function BlogMain() {
 
   const getAuthor = (id) => {
     if (allUser) {
-      return Array.from(allUser).filter((user) => user._id === id)
+      return Array.from(allUser).filter((user) => user._id === id);
     }
     return false;
   };
 
   useEffect(() => {
     getAllUserByUser();
-    getNameUser();
+
+    const tokens = localStorage.getItem('tokens');
+    if (tokens) getNameUser();
   }, []);
 
   const displayComments = (comment, i) => {
@@ -151,15 +153,8 @@ function BlogMain() {
 
             <Box className="commentBox">
               <BlogPost>
-                <Box
-                  component="form"
-                  className="commentForm"
-                  noValidate
-                  sx={{ mt: 1 }}
-                >
-                  <FormLabel className="form-control-label">
-                    Bình luận của bạn
-                  </FormLabel>
+                <Box component="form" className="commentForm" noValidate sx={{ mt: 1 }}>
+                  <FormLabel className="form-control-label">Bình luận của bạn</FormLabel>
                   <TextField
                     fullWidth
                     required
@@ -183,8 +178,7 @@ function BlogMain() {
                 {isLoading && <CircularProgress />}
               </BlogPost>
 
-              {dataBlog.comments &&
-                [...dataBlog.comments].reverse().map(displayComments)}
+              {dataBlog.comments && [...dataBlog.comments].reverse().map(displayComments)}
             </Box>
           </div>
         </Grid>

@@ -1,30 +1,25 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
-import { useRouter } from "next/router";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
+import { useRouter } from 'next/router';
 
-import AdminLayout from "../../../../layouts/admin";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { FormLabel } from "@mui/material";
-import { Grid } from "@mui/material";
-import { Button } from "@mui/material";
+import AdminLayout from '../../../../layouts/admin';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { FormLabel } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Button } from '@mui/material';
 
-import {
-  editCourse,
-  addTrack,
-  getCourseBySlug,
-  deleteCourse,
-} from "../../../../store";
+import { editCourse, addTrack, getCourseBySlug, deleteCourse } from '../../../../store';
 
-import Copyright from "../../../../components/CopyRight";
-import TrackList from "../../../../components/track/TrackList";
-import Track from "../../../../components/track/Track";
-import { API_ADMIN } from "../../../../constants";
-import RioUpload from "../../../../components/RioUpload";
-import Notification from "../../../../components/notification/Notification";
-import Error from "../../../../components/notification/Error";
+import Copyright from '../../../../components/CopyRight';
+import TrackList from '../../../../components/track/TrackList';
+import Track from '../../../../components/track/Track';
+import { API_ADMIN } from '../../../../constants';
+import RioUpload from '../../../../components/RioUpload';
+import Notification from '../../../../components/notification/Notification';
+import Error from '../../../../components/notification/Error';
 
 function EditCourse() {
   const router = useRouter();
@@ -61,8 +56,8 @@ function EditCourse() {
   const { getCourseBySlugAPI } = getCourseBySlug();
   const getDataCourse = async (courseId) => {
     const data = await getCourseBySlugAPI(courseId);
-    setDataCourse(data.course);
-    setDataTracks(data.course.tracks);
+    setDataCourse(data?.course);
+    setDataTracks(data?.course?.tracks);
   };
 
   // add Track
@@ -136,21 +131,15 @@ function EditCourse() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container className="settings-container admin-courses" sx={{ mt: 20 }}>
         {/* <!-- Page content --> */}
-        <Grid
-          container
-          spacing={1}
-          className="settings-padding settings-content"
-        >
+        <Grid container spacing={1} className="settings-padding settings-content">
           {popup && (
             <Notification
               title="Thêm bài học thành công"
@@ -186,20 +175,13 @@ function EditCourse() {
                 </Grid>
               </div>
               <Box className="settings-card-profile-body">
-                <Box
-                  component="form"
-                  noValidate
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 1 }}
-                >
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                   <h6 className="settings-form-heading">Course information</h6>
                   <Grid container spacing={1} className="settings-form-padding">
                     <Grid item xs={12} lg={6}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Title
-                        </FormLabel>
-                        {dataCourse.title && (
+                        <FormLabel className="form-control-label">Title</FormLabel>
+                        {dataCourse?.title && (
                           <TextField
                             fullWidth
                             required
@@ -208,18 +190,16 @@ function EditCourse() {
                             className="settings-form-input"
                             name="title"
                             onChange={handleChange}
-                            defaultValue={dataCourse.title}
-                            value={dataCourse.title}
+                            defaultValue={dataCourse?.title}
+                            value={dataCourse?.title}
                           />
                         )}
                       </div>
                     </Grid>
                     <Grid item xs={12} lg={6}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Slug
-                        </FormLabel>
-                        {dataCourse.slug && (
+                        <FormLabel className="form-control-label">Slug</FormLabel>
+                        {dataCourse?.slug && (
                           <TextField
                             fullWidth
                             label="Slug"
@@ -229,20 +209,16 @@ function EditCourse() {
                             required
                             onChange={handleChange}
                             error={!slugnoti}
-                            helperText={
-                              !slugnoti ? "Course Slug Already Exist" : ""
-                            }
-                            defaultValue={dataCourse.slug}
-                            value={dataCourse.slug}
+                            helperText={!slugnoti ? 'Course Slug Already Exist' : ''}
+                            defaultValue={dataCourse?.slug}
+                            value={dataCourse?.slug}
                           />
                         )}
                       </div>
                     </Grid>
                     <Grid item xs={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Description
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Description</FormLabel>
                         {dataCourse && (
                           <TextField
                             fullWidth
@@ -254,17 +230,15 @@ function EditCourse() {
                             name="description"
                             onChange={handleChange}
                             rows={4}
-                            defaultValue={dataCourse.description}
-                            value={dataCourse.description}
+                            defaultValue={dataCourse?.description}
+                            value={dataCourse?.description}
                           />
                         )}
                       </div>
                     </Grid>
                     <Grid item xs={12} md={4} className="form-control-file">
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Feature image
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Feature image</FormLabel>
                         <RioUpload
                           // title="Feature Image"
                           isVideo={false}
@@ -276,24 +250,20 @@ function EditCourse() {
                             sx={{
                               maxWidth: { xs: 350, md: 250 },
                             }}
-                            src={dataCourse.featured_image}
+                            src={dataCourse?.featured_image}
                           />
                         )}
                       </div>
                     </Grid>
                     <Grid item xs={12} md={8} className="form-control-file">
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Video_url
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Video_url</FormLabel>
                         <RioUpload
                           // title="Video"
                           isVideo
                           setValue={hanleChangeVideoUrl}
                         />
-                        {isVideo && (
-                          <ReactPlayer url={dataCourse.video_url} controls />
-                        )}
+                        {isVideo && <ReactPlayer url={dataCourse?.video_url} controls />}
                       </div>
                     </Grid>
                   </Grid>
@@ -301,15 +271,11 @@ function EditCourse() {
                   <TrackList
                     handleShowFormTrack={() => setShowFormTrack(true)}
                     dataTracks={dataTracks}
-                    slug={router.query.courseId}
+                    slug={router?.query?.courseId}
                     updateTracks={updateTracks}
                   />
 
-                  <Button
-                    type="submit"
-                    sx={{ mt: 3, mb: 2 }}
-                    className="btn btn-primary"
-                  >
+                  <Button type="submit" sx={{ mt: 3, mb: 2 }} className="btn btn-primary">
                     Submit
                   </Button>
                 </Box>

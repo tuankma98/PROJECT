@@ -18,7 +18,8 @@ function Profile() {
   };
 
   useEffect(() => {
-    getDataUser();
+    const tokens = localStorage.getItem('tokens');
+    if (tokens) getDataUser();
   }, []);
 
   return (

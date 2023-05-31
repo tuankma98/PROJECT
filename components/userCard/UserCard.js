@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class UserCards extends Component {
   state = {
@@ -15,15 +15,17 @@ class UserCards extends Component {
   loadData = () => {
     const { per, page, data } = this.state;
     const endpoint = `https://randomuser.me/api/?nat=us&results=${per}&page=${page}`;
-    fetch(endpoint)
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({
-          data: [...data, ...json.results],
-          scrolling: false,
-          total_pages: json.info.results,
+    if (endpoint) {
+      fetch(endpoint)
+        .then((response) => response.json())
+        .then((json) => {
+          this.setState({
+            data: [...data, ...json.results],
+            scrolling: false,
+            total_pages: json.info.results,
+          });
         });
-      });
+    }
   };
 
   loadMore = () => {
@@ -32,7 +34,7 @@ class UserCards extends Component {
         page: prevState.page + 1,
         scrolling: true,
       }),
-      this.loadData
+      this.loadData,
     );
   };
 
@@ -50,21 +52,13 @@ class UserCards extends Component {
               <div className="card">
                 <div className="card-body">
                   <div className="avatar">
-                    <img
-                      src={data.picture.large}
-                      className="card-img-top"
-                      alt=""
-                    />
+                    <img src={data.picture.large} className="card-img-top" alt="" />
                   </div>
                   <h5 className="card-title">
-                    {this.uppercase(data.name.first) +
-                      " " +
-                      this.uppercase(data.name.last)}
+                    {this.uppercase(data.name.first) + ' ' + this.uppercase(data.name.last)}
                   </h5>
                   <p className="card-text">
-                    {data.location.city +
-                      ", " +
-                      this.uppercase(data.location.state)}
+                    {data.location.city + ', ' + this.uppercase(data.location.state)}
                     <br />
                     <span className="phone">{data.phone}</span>
                   </p>

@@ -1,12 +1,12 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import { Box, Button, Container, Grid } from "@mui/material";
-import AdminLayout from "../../layouts/admin";
+import { Box, Button, Container, Grid } from '@mui/material';
+import AdminLayout from '../../layouts/admin';
 
-import { getCourses, getAdmin } from "../../store";
-import TrackItem from "../../components/track/TrackItem";
+import { getCourses, getAdmin } from '../../store';
+import TrackItem from '../../components/track/TrackItem';
 
 export default function MyCourse() {
   const [courses, setCourses] = useState([]);
@@ -25,11 +25,12 @@ export default function MyCourse() {
     const allCourse = data.course;
     const myCourses = allCourse.filter((x) => x.created_by === userName);
 
-    if (myCourses) setCourses(myCourses)
+    if (myCourses) setCourses(myCourses);
   };
 
   useEffect(() => {
-    getUserNameAdmin();
+    const tokens = localStorage.getItem('tokensAdmin');
+    if (tokens) getUserNameAdmin();
   }, []);
 
   //update Tracks
@@ -40,30 +41,24 @@ export default function MyCourse() {
   // Add course
   const handleAddCourse = () => {
     router.push({
-      pathname: "/admin/courses/"
+      pathname: '/admin/courses/',
     });
-  }
+  };
 
   return (
     <Box
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container className="settings-container admin-courses" sx={{ mt: 20 }}>
         {/* <!-- Page content --> */}
-        <Grid
-          container
-          spacing={1}
-          className="settings-padding settings-content"
-        >
+        <Grid container spacing={1} className="settings-padding settings-content">
           <Grid item lg={12}>
             <div className="settings-form settings-card settings-shadow">
               <div className="settings-card-header">

@@ -1,16 +1,16 @@
-import * as React from "react";
-import DefaultLayout from "../../layouts/default";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { useState, useEffect } from "react";
-import { Avatar, FormLabel } from "@mui/material";
-import { Grid } from "@mui/material";
-import { API_ME, API_PATCH_USER, ME } from "../../constants";
-import { Button } from "@mui/material";
-import Copyright from "../../components/CopyRight";
+import * as React from 'react';
+import DefaultLayout from '../../layouts/default';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { useState, useEffect } from 'react';
+import { Avatar, FormLabel } from '@mui/material';
+import { Grid } from '@mui/material';
+import { API_ME, API_PATCH_USER, ME } from '../../constants';
+import { Button } from '@mui/material';
+import Copyright from '../../components/CopyRight';
 
-import { getUser, patchDataUser } from "../../store";
+import { getUser, patchDataUser } from '../../store';
 function User() {
   const [dataUser, setDataUser] = useState();
 
@@ -21,7 +21,8 @@ function User() {
   };
 
   useEffect(() => {
-    getDataUser();
+    const tokens = localStorage.getItem('tokens');
+    if (tokens) getDataUser();
   }, []);
 
   const handleChange = (e) => {
@@ -48,12 +49,10 @@ function User() {
       component="main"
       sx={{
         backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
+          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Container className="settings-container" sx={{ mt: 9 }}>
@@ -77,26 +76,19 @@ function User() {
           {/* <!-- Image --> */}
           <span className="settings-banner__img"></span>
           {/* <!-- Header container --> */}
-          <Grid
-            container
-            className="settings-banner-container settings-padding"
-          >
+          <Grid container className="settings-banner-container settings-padding">
             <Grid lg={7} md={10}>
               <h1>Xin chào {dataUser && dataUser.username}</h1>
               <p>
-                Đây là trang hồ sơ của bạn. Bạn có thể xem tiến độ bạn đã đạt
-                được với công việc và quản lý các dự án hoặc nhiệm vụ được giao
+                Đây là trang hồ sơ của bạn. Bạn có thể xem tiến độ bạn đã đạt được với công việc và
+                quản lý các dự án hoặc nhiệm vụ được giao
               </p>
             </Grid>
           </Grid>
         </Box>
 
         {/* <!-- Page content --> */}
-        <Grid
-          container
-          spacing={1}
-          className="settings-padding settings-content"
-        >
+        <Grid container spacing={1} className="settings-padding settings-content">
           <Grid item lg={4}>
             <Box className="settings-card settings-card-profile settings-shadow">
               <Box className="settings-card-profile__img">
@@ -147,21 +139,12 @@ function User() {
                 </Grid>
               </div>
               <Box className="settings-card-profile-body">
-                <Box
-                  component="form"
-                  noValidate
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 1 }}
-                >
-                  <h6 className="settings-form-heading">
-                    Thông tin người dùng
-                  </h6>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                  <h6 className="settings-form-heading">Thông tin người dùng</h6>
                   <Grid container spacing={1} className="settings-form-padding">
                     <Grid item xs={12} lg={6}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Username
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Username</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -175,9 +158,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} lg={6}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Email
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Email</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -196,9 +177,7 @@ function User() {
                   <Grid container spacing={1} className="settings-form-padding">
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Address
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Address</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -216,9 +195,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Github
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Github</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -236,9 +213,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Facebook
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Facebook</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -256,9 +231,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Instagram
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Instagram</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -276,9 +249,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          LinkedIn
-                        </FormLabel>
+                        <FormLabel className="form-control-label">LinkedIn</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -296,9 +267,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Twitter
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Twitter</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -316,9 +285,7 @@ function User() {
                     </Grid>
                     <Grid item xs={12} md={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          Youtube
-                        </FormLabel>
+                        <FormLabel className="form-control-label">Youtube</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -340,9 +307,7 @@ function User() {
                   <Grid container spacing={1} className="settings-form-padding">
                     <Grid item xs={12}>
                       <div className="">
-                        <FormLabel className="form-control-label">
-                          About Me
-                        </FormLabel>
+                        <FormLabel className="form-control-label">About Me</FormLabel>
                         {dataUser && (
                           <TextField
                             fullWidth
@@ -362,11 +327,7 @@ function User() {
                     </Grid>
                   </Grid>
 
-                  <Button
-                    type="submit"
-                    sx={{ mt: 3, mb: 2 }}
-                    className="btn btn-primary"
-                  >
+                  <Button type="submit" sx={{ mt: 3, mb: 2 }} className="btn btn-primary">
                     Chỉnh sửa
                   </Button>
                 </Box>

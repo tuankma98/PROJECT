@@ -1,6 +1,6 @@
-import React from "react";
-import { Grid, Box } from "@mui/material";
-import TrackItem from "./TrackItem";
+import React from 'react';
+import { Grid, Box } from '@mui/material';
+import TrackItem from './TrackItem';
 
 export default function TrackList(props) {
   const { dataTracks, slug } = props;
@@ -10,14 +10,14 @@ export default function TrackList(props) {
   };
 
   const updateTracks = (slug) => {
-    props.updateTracks(slug)
-  }
+    props.updateTracks(slug);
+  };
 
   return (
     <Grid container spacing={1} className="settings-form-padding">
       <Box className="admin-courses-track">
         <h3>Nội dung khóa học</h3>
-        {dataTracks.length} bài học
+        {dataTracks?.length} bài học
         <ul>
           {dataTracks &&
             dataTracks.map((track, index) => (
